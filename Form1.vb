@@ -21,7 +21,7 @@
 
 
         ElseIf FrenchArr.Contains(FirstChar) Then
-            LanguageDetector = "Framch"
+            LanguageDetector = "Franch"
 
 
         ElseIf RusianArr.Contains(FirstChar) Then
@@ -71,7 +71,8 @@
 
     Function ChooseFromTo(ToLanguage As String())
         If Not RichTextBox1.Text = "" Then
-            Dim Arr = SplitString(RichTextBox1.Text, 1)
+            Dim Arr = SplitString(LCase(RichTextBox1.Text), 1)
+
             Dim MyLanguage As String = CheckLanguage(Arr(0))
 
             Select Case (MyLanguage)
@@ -97,7 +98,11 @@
                 str += dict.Item(Arr(i))
             Next
             'RichTextBox1.Text = ""
-            RichTextBox1.Text = str
+            If RadioButton1.Checked AndAlso Control.IsKeyLocked(Keys.CapsLock) Then
+                RichTextBox1.Text = UCase(str)
+            Else
+                RichTextBox1.Text = str
+            End If
         End If
         Return 0
     End Function
